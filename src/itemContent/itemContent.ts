@@ -41,15 +41,14 @@ const renderItemContent = ({
             itemContent: {
               ...itemContent,
               [itemContentId]: {
+                version: editorJSData.version,
                 blocks: editorJSData.blocks,
+                time: editorJSData.time,
               },
             },
             layout: layout,
           })),
       });
-
-      document.body.append(dialog);
-      dialog.showModal();
     });
   }
 

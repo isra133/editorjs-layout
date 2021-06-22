@@ -20,9 +20,15 @@ interface RenderItemProps extends RenderContext {
 const renderItem = ({ data, itemContentData, ...context }: RenderItemProps) => {
   const wrapper = document.createElement("div");
 
-  wrapper.id = data.id;
-  wrapper.className = data.className;
-  wrapper.style.cssText = data.style;
+  if (data.id) {
+    wrapper.id = data.id;
+  }
+  if (data.className) {
+    wrapper.className = data.className;
+  }
+  if (data.style) {
+    wrapper.style.cssText = data.style;
+  }
 
   const editorJSData = itemContentData[data.itemContentId] ?? { blocks: [] };
 

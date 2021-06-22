@@ -1,5 +1,5 @@
 import type { OutputData } from "@editorjs/editorjs";
-import dialogPolyfill from "dialog-polyfill";
+import { Modal as modalBo } from "bootstrap";
 import { v4 as uuidv4 } from "uuid";
 import type { LayoutBlockToolConfig } from "../LayoutBlockTool";
 
@@ -14,21 +14,41 @@ const createDialog = ({
   editorJSConfig: LayoutBlockToolConfig["editorJSConfig"];
   onClose?: (event: { editorJSData: OutputData }) => void;
 }) => {
-  const dialog = document.createElement("dialog");
+  const modalHtml = document.createElement("div");
+  const modalId = uuidv4();
+  modalHtml.id = modalId;
+  modalHtml.className = "modal";
 
-  dialogPolyfill.registerDialog(dialog);
+  const dialog = document.createElement("div");
+  dialog.className = "modal-dialog";
 
-  dialog.style.maxWidth = "960px";
-  // Make be not able to click inner
-  dialog.style.padding = "0";
-  dialog.style.width = "calc(100% - 64px)";
+  const dialogContent = document.createElement("div");
+  dialogContent.className = "modal-content";
+
+  const headerHtml = document.createElement("div");
+  headerHtml.className = "modal-header";
+
+  const titleHtml = document.createElement("div");
+  titleHtml.className = "modal-title";
+  titleHtml.innerHTML = "EditorJS Layout";
+
+  const buttonHTML = document.createElement("div");
+  buttonHTML.className = "btn-close";
+  buttonHTML.setAttribute("data-bs-dismiss", "modal");
 
   const editorJSHolder = document.createElement("div");
   const editorJSHolderID = uuidv4();
-
   editorJSHolder.id = editorJSHolderID;
+  editorJSHolder.className = "modal-body";
 
-  dialog.append(editorJSHolder);
+  headerHtml.append(titleHtml);
+  headerHtml.append(buttonHTML);
+  dialogContent.append(headerHtml);
+  dialogContent.append(editorJSHolder);
+  dialog.append(dialogContent);
+  modalHtml.append(dialog);
+
+  document.body.append(modalHtml);
 
   const editorJS = new EditorJS({
     ...editorJSConfig,
@@ -36,31 +56,19 @@ const createDialog = ({
     data,
   });
 
-  const handleDialogClick = (event: MouseEvent) => {
-    if (!(event.target instanceof Node) || !event.target.isEqualNode(dialog)) {
-      return;
-    }
-
-    dialog.close();
+  var options = {
+    backdrop: true,
   };
+  var element = document.getElementById(modalId)!;
+  const modal = new modalBo(element, options);
+  modal.show();
 
-  dialog.addEventListener("click", handleDialogClick);
-
-  const handleDialogClose = async () => {
+  element.addEventListener("hide.bs.modal", async function (event) {
     const editorJSData = await editorJS.save();
-
     editorJS.destroy();
-
-    dialog.removeEventListener("click", handleDialogClick);
-    dialog.removeEventListener("close", handleDialogClose);
-    dialog.remove();
-
     onClose?.({ editorJSData });
-  };
-
-  dialog.addEventListener("close", handleDialogClose);
-
-  return dialog;
+    element.remove();
+  });
 };
 
 export { createDialog };

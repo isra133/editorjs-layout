@@ -1,7 +1,7 @@
 {
-  "name": "editorjs-layout",
-  "version": "0.0.0",
-  "description": "Layout block tool for Editor.js. ",
+  "name": "@editorjs/nested-list",
+  "version": "1.0.0",
+  "description": "Layout block tool for Editor.js. Custom to use Boostrap Modals",
   "keywords": [
     "codex editor",
     "editor.js",
@@ -9,16 +9,8 @@
     "layout",
     "tool"
   ],
-  "bugs": {
-    "url": "https://github.com/hata6502/editorjs-layout/issues"
-  },
-  "repository": "https://github.com/hata6502/editorjs-layout",
-  "funding": {
-    "type": "github",
-    "url": "https://github.com/sponsors/hata6502"
-  },
   "license": "MIT",
-  "author": "Tomoyuki Hata <hato6502@gmail.com>",
+  "author": "Tomoyuki Hata <hato6502@gmail.com>, Runig006",
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -29,14 +21,16 @@
     "generate-disclaimer": "yarn licenses generate-disclaimer --ignore-platform > DISCLAIMER.md",
     "semantic-release": "semantic-release",
     "test": "yarn check-license && prettier --check . && tsc --noEmit",
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "build": "webpack"
   },
   "dependencies": {
     "@editorjs/editorjs": "^2.19.1"
   },
   "devDependencies": {
+    "@types/bootstrap": "^5.0.16",
     "@types/uuid": "^8.3.0",
-    "dialog-polyfill": "^0.5.6",
+    "bootstrap": "^5.0.1",
     "ionicons": "^5.3.0",
     "license-checker": "^25.0.1",
     "prettier": "^2.2.1",

@@ -41,9 +41,15 @@ const renderContainer = ({
 }: RenderContainerProps) => {
   const wrapper = document.createElement("div");
 
-  wrapper.id = data.id;
-  wrapper.className = data.className;
-  wrapper.style.cssText = data.style;
+  if (data.id) {
+    wrapper.id = data.id;
+  }
+  if (data.className) {
+    wrapper.className = data.className;
+  }
+  if (data.style) {
+    wrapper.style.cssText = data.style;
+  }
 
   data.children.forEach((child) => {
     let childElement: HTMLDivElement;
