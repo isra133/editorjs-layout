@@ -16,7 +16,10 @@ module.exports = {
     library: "EditorJSLayout",
     libraryTarget: "umd",
   },
+  externals: {
+    "bootstrap": "bootstrap",
+  },
   optimization: {
-		minimize: false
-	}
+    minimize: true
+  }
 };

@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "declaration": true,
+    "declaration": false,
     "lib": ["ESNext", "DOM"],
     "module": "ESNext",
     "moduleResolution": "node",
     "outDir": "dist",
-    "pretty": true,
-    "skipLibCheck": true,
+    "pretty": false,
+    "skipLibCheck": false,
     "sourceMap": true,
     "strict": true,
     "target": "ES2015"
