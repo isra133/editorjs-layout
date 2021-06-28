@@ -30,7 +30,7 @@ const createDialog = ({
 
   const titleHtml = document.createElement("div");
   titleHtml.className = "modal-title";
-  titleHtml.innerHTML = "EditorJS Layout";
+  titleHtml.innerHTML = "Editor de columnas";
 
   const buttonHTML = document.createElement("div");
   buttonHTML.className = "btn-close";
