@@ -62,11 +62,11 @@ const createDialog = ({
   var element = document.getElementById(modalId)!;
   const modal = new modalBo(element, options);
   modal.show();
+  
+  console.log(element);
 
   element.addEventListener("hide.bs.modal", async function (event) {
-     
-    console.log(event);
-    
+   
     const editorJSData = await editorJS.save();
     editorJS.destroy();
     onClose?.({ editorJSData });
